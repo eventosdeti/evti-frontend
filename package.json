@@ -1,6 +1,6 @@
 {
   "homepage": "https://eventos-de-ti.github.io",
-  "name": "dev-events",
+  "name": "eventos-de-ti",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
