@@ -24,7 +24,7 @@ const Wrapper = styled.header`
 const Header = () => (
   <Wrapper>
     <div>
-      <Title title="Eventos da T.I" size={2} />
+      <Title title="Eventos de T.I" size={2} />
     </div>
   </Wrapper>
 );
