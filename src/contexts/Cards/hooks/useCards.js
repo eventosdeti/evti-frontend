@@ -14,7 +14,7 @@ const useCards = () => {
     [activeCards]
   );
   const sortedCards = useMemo(
-    () => cardsWidthDueDate.sort((a, b) => new Date(b.due) - new Date(a.due)),
+    () => cardsWidthDueDate.sort((a, b) => new Date(a.due) - new Date(b.due)),
     [cardsWidthDueDate]
   );
 
