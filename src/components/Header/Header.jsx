@@ -9,6 +9,12 @@ import { DEFAULT_PADDING, GREY_LIGHTER_COLOR } from "../../settings";
 const Title = styled(StledTitle)`
   color: ${props => props.theme.palette.secondaryTextColor};
   font-weight: bold;
+  margin: 0 0 0.5rem 0;
+`;
+
+const Description = styled.p`
+  color: ${props => props.theme.palette.initialColor};
+  margin: 0;
 `;
 
 const Wrapper = styled.header`
@@ -25,6 +31,7 @@ const Header = () => (
   <Wrapper>
     <div>
       <Title title="Eventos de T.I" size={2} />
+      <Description> Página dos eventos de tecnologia do Ceará</Description>
     </div>
   </Wrapper>
 );
