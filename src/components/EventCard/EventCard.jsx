@@ -1,4 +1,5 @@
 import React from "react";
+import ReactGA from "react-ga";
 import styled from "styled-components";
 import Card from "../Card";
 import CardHeader from "../CardHeader";
@@ -15,9 +16,9 @@ const Header = styled(CardHeader)`
 const Date = styled.div`
   text-transform: uppercase;
   font-weight: bold;
-  color: ${props => props.theme.palette.primaryColor};
+  color: ${(props) => props.theme.palette.primaryColor};
   font-size: 0.7rem;
-  ${props => props.theme.mediaQueries.medium`
+  ${(props) => props.theme.mediaQueries.medium`
     font-size: 1rem;
   `}
 `;

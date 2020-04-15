@@ -1,4 +1,5 @@
 import React from "react";
+import ReactGA from "react-ga";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import GlobalStyles from "../components/GlobalStyles";
@@ -10,22 +11,32 @@ import { ToasterProvider } from "../contexts/Toaster";
 import { CardsProvider } from "../contexts/Cards";
 import { ThemeProvider } from "../contexts/Theme";
 
-const AppContainer = () => (
-  <ToasterProvider>
-    <ThemeProvider>
-      <GlobalStyles />
-      <Router>
-        <Switch>
-          <Route path="/">
-            <CardsProvider>
-              <HomeContainer />
-            </CardsProvider>
-          </Route>
-        </Switch>
-      </Router>
-      <ToasterContainer />
-    </ThemeProvider>
-  </ToasterProvider>
-);
+const { REACT_APP_GA, NODE_ENV } = process.env;
+
+const AppContainer = () => {
+  React.useEffect(() => {
+    if (REACT_APP_GA && NODE_ENV !== "development") {
+      ReactGA.initialize("163717305");
+      ReactGA.pageview(`${window.location.pathname}${window.location.search}`);
+    }
+  }, []);
+  return (
+    <ToasterProvider>
+      <ThemeProvider>
+        <GlobalStyles />
+        <Router>
+          <Switch>
+            <Route path="/">
+              <CardsProvider>
+                <HomeContainer />
+              </CardsProvider>
+            </Route>
+          </Switch>
+        </Router>
+        <ToasterContainer />
+      </ThemeProvider>
+    </ToasterProvider>
+  );
+};
 
 export default AppContainer;
