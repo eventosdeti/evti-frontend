@@ -16,7 +16,7 @@ const { REACT_APP_GA, NODE_ENV } = process.env;
 const AppContainer = () => {
   React.useEffect(() => {
     if (REACT_APP_GA && NODE_ENV !== "development") {
-      ReactGA.initialize("163717305");
+      ReactGA.initialize(REACT_APP_GA);
       ReactGA.pageview(`${window.location.pathname}${window.location.search}`);
     }
   }, []);
