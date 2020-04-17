@@ -22,14 +22,13 @@ const Date = styled.div`
   `}
 `;
 
-const EventCard = ({ name, due, desc, moreInfoUrl }) => {
+const EventCard = ({ id, name, due, desc, moreInfoUrl }) => {
   return (
     <Card>
       <Header>
         <Date>{due}</Date>
       </Header>
       <Title title={name} size={1} />
-
       <div dangerouslySetInnerHTML={{ __html: desc }} />
       <CardFooter>
         <Button size="small" as="a" href={moreInfoUrl}>

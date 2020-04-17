@@ -6,19 +6,19 @@ import { DEFAULT_PADDING } from "../../settings";
 
 const initial = css`
   background-color: #fff;
-  border-color: ${props => props.theme.palette.initialColor};
-  color: ${props => props.theme.palette.primaryTextColor};
+  border-color: ${(props) => props.theme.palette.initialColor};
+  color: ${(props) => props.theme.palette.primaryTextColor};
 `;
 
 const primary = css`
-  background-color: ${props => props.theme.palette.primaryColor};
-  border-color: ${props => darken("0.05", props.theme.palette.primaryColor)};
+  background-color: ${(props) => props.theme.palette.primaryColor};
+  border-color: ${(props) => darken("0.05", props.theme.palette.primaryColor)};
 `;
 
 const tertiary = css`
-  background-color: ${props => props.theme.palette.tertiaryColor};
-  border-color: ${props => darken("0.05", props.theme.palette.tertiaryColor)};
-  color: ${props => props.theme.palette.secondaryTextColor};
+  background-color: ${(props) => props.theme.palette.tertiaryColor};
+  border-color: ${(props) => darken("0.05", props.theme.palette.tertiaryColor)};
+  color: ${(props) => props.theme.palette.secondaryTextColor};
 `;
 
 const Wrapper = styled.section`
@@ -27,9 +27,9 @@ const Wrapper = styled.section`
   padding: 30px;
   border-radius: 5px;
   margin: ${DEFAULT_PADDING};
-  ${props => props.palette === "initial" && initial};
-  ${props => props.palette === "primary" && primary};
-  ${props => props.palette === "tertiary" && tertiary};
+  ${(props) => props.palette === "initial" && initial};
+  ${(props) => props.palette === "primary" && primary};
+  ${(props) => props.palette === "tertiary" && tertiary};
 `;
 
 const Card = ({ palette = "initial", children, className }) => (

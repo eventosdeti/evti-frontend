@@ -13,11 +13,11 @@ const ChangeViewButton = ({
   viewTypes,
   onViewAll,
   onViewCurrentMonth,
-  onViewNextMonth
+  onViewNextMonth,
 }) => {
   const showAll = React.useMemo(() => view === viewTypes.ALL.key, [
     view,
-    viewTypes
+    viewTypes,
   ]);
   const showCurrentMonth = React.useMemo(
     () => view === viewTypes.CURRENT_MONTH.key,
@@ -25,7 +25,7 @@ const ChangeViewButton = ({
   );
   const showNextMonth = React.useMemo(() => view === viewTypes.NEXT_MONTH.key, [
     view,
-    viewTypes
+    viewTypes,
   ]);
 
   return (

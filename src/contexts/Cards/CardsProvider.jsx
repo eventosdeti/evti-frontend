@@ -1,47 +1,48 @@
 import React from "react";
 
 import Context from "./CardsContext";
-import useCards from "./hooks/useCards";
 import useCardsView from "./hooks/useCardsView";
+import useValidCards from "./hooks/useValidCards";
+import useDateFilteredCards from "./hooks/useDateFilteredCards";
+import useFetch from "../../hooks/useFetch";
+
+const { REACT_APP_TRELLO_BOARD_JSON_URI } = process.env;
 
 const CardsProvider = ({ children }) => {
-  const {
-    cards,
-    setAllCards,
-    viewAllCards,
-    viewCurrentMonthCards,
-    viewNextMonthCards
-  } = useCards();
-
+  const [allCards, setAllCards] = React.useState([]);
   const { view, viewTypes, setView } = useCardsView();
-  const [isLoadingCards, setIsLoadingCards] = React.useState(true);
+  const [isLoadingCards, setIsLoadingCards] = React.useState(false);
+
+  const { data, isFetching, fetchData } = useFetch(
+    REACT_APP_TRELLO_BOARD_JSON_URI
+  );
+
+  const validCards = useValidCards(allCards);
+  const dateFilteredCards = useDateFilteredCards(validCards, view, viewTypes);
 
   React.useEffect(() => {
-    if (view === viewTypes.ALL.key) {
-      viewAllCards();
+    fetchData();
+  }, [fetchData]);
+
+  React.useEffect(() => {
+    if (data.result) {
+      setAllCards(data.result.cards);
     }
-    if (view === viewTypes.CURRENT_MONTH.key) {
-      viewCurrentMonthCards();
-    }
-    if (view === viewTypes.NEXT_MONTH.key) {
-      viewNextMonthCards();
-    }
-  }, [
-    view,
-    viewTypes,
-    viewAllCards,
-    viewCurrentMonthCards,
-    viewNextMonthCards
-  ]);
+  }, [data.result, setAllCards]);
+
+  React.useEffect(() => {
+    setIsLoadingCards(isFetching);
+  }, [isFetching, setIsLoadingCards]);
 
   const value = {
     view,
     setView,
     viewTypes,
-    cards,
+    validCards,
+    dateFilteredCards,
     setAllCards,
     isLoadingCards,
-    setIsLoadingCards
+    setIsLoadingCards,
   };
   return <Context.Provider value={value}>{children}</Context.Provider>;
 };

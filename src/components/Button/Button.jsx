@@ -18,7 +18,7 @@ const base = css`
 `;
 
 const disabled = css`
-  ${props =>
+  ${(props) =>
     props.disabled &&
     `
   opacity: 0.3;
@@ -27,22 +27,22 @@ const disabled = css`
 `;
 
 const size = css`
-  ${props =>
+  ${(props) =>
     props.size === "tiny" &&
     `
 font-size:0.7em;
 `};
-  ${props =>
+  ${(props) =>
     props.size === "small" &&
     `
   font-size:0.8em;
 `};
-  ${props =>
+  ${(props) =>
     props.size === "medium" &&
     `
   font-size: 1em;
 `};
-  ${props =>
+  ${(props) =>
     props.size === "large" &&
     `
   font-size: 1.2em;
@@ -50,10 +50,10 @@ font-size:0.7em;
 `;
 
 const initial = css`
-  color: ${props => props.theme.palette.primaryTextColor};
-  background-color: ${props => props.theme.palette.initialColor};
-  border-color: ${props => darken("0.05", props.theme.palette.initialColor)};
-  ${props =>
+  color: ${(props) => props.theme.palette.primaryTextColor};
+  background-color: ${(props) => props.theme.palette.initialColor};
+  border-color: ${(props) => darken("0.05", props.theme.palette.initialColor)};
+  ${(props) =>
     props.as === "button" &&
     `
   &:hover:enabled,
@@ -61,7 +61,7 @@ const initial = css`
     background-color: ${darken("0.05", props.theme.palette.initialColor)};
   }
   `}
-  ${props =>
+  ${(props) =>
     props.as === "a" &&
     `
   &:hover,
@@ -72,10 +72,10 @@ const initial = css`
 `;
 
 const primary = css`
-  color: ${props => props.theme.palette.secondaryTextColor};
-  background-color: ${props => props.theme.palette.primaryColor};
-  border-color: ${props => darken("0.05", props.theme.palette.primaryColor)};
-  ${props =>
+  color: ${(props) => props.theme.palette.secondaryTextColor};
+  background-color: ${(props) => props.theme.palette.primaryColor};
+  border-color: ${(props) => darken("0.05", props.theme.palette.primaryColor)};
+  ${(props) =>
     props.as === "button" &&
     `
     &:hover:enabled,
@@ -84,7 +84,7 @@ const primary = css`
     }
     `};
 
-  ${props =>
+  ${(props) =>
     props.as === "a" &&
     `
       &:hover,
@@ -95,10 +95,10 @@ const primary = css`
 `;
 
 const tertiary = css`
-  color: ${props => props.theme.palette.secondaryTextColor};
-  background-color: ${props => props.theme.palette.tertiaryColor};
-  border-color: ${props => darken("0.05", props.theme.palette.tertiaryColor)};
-  ${props =>
+  color: ${(props) => props.theme.palette.secondaryTextColor};
+  background-color: ${(props) => props.theme.palette.tertiaryColor};
+  border-color: ${(props) => darken("0.05", props.theme.palette.tertiaryColor)};
+  ${(props) =>
     props.as === "button" &&
     `
   &:hover:enabled,
@@ -106,7 +106,7 @@ const tertiary = css`
     background-color: ${darken("0.05", props.theme.palette.tertiaryColor)};
   }
   `};
-  ${props =>
+  ${(props) =>
     props.as === "a" &&
     `
   &:focus {
@@ -119,9 +119,9 @@ const Wrapper = styled.button`
   ${base}
   ${disabled}
   ${size}
-  ${props => props.palette === "initial" && initial};
-  ${props => props.palette === "primary" && primary};
-  ${props => props.palette === "tertiary" && tertiary}
+  ${(props) => props.palette === "initial" && initial};
+  ${(props) => props.palette === "primary" && primary};
+  ${(props) => props.palette === "tertiary" && tertiary}
 `;
 
 const Button = ({
@@ -132,7 +132,7 @@ const Button = ({
   onClick,
   as = "button",
   href,
-  className
+  className,
 }) => (
   <Wrapper
     className={className}

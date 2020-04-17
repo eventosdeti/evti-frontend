@@ -1,5 +1,5 @@
 {
-  "homepage": "https://eventos-de-ti.github.io",
+  "homepage": "https://eventosdeti.com.br",
   "name": "eventos-de-ti",
   "version": "0.1.0",
   "private": true,
@@ -16,6 +16,7 @@
     "react-ga": "^2.7.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",
+    "react-share": "^4.1.0",
     "react-transition-group": "1.x",
     "styled-components": "^5.0.1"
   },

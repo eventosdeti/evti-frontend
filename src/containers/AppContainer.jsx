@@ -21,21 +21,21 @@ const AppContainer = () => {
     }
   }, []);
   return (
-    <ToasterProvider>
-      <ThemeProvider>
-        <GlobalStyles />
-        <Router>
-          <Switch>
-            <Route path="/">
-              <CardsProvider>
+    <CardsProvider>
+      <ToasterProvider>
+        <ThemeProvider>
+          <GlobalStyles />
+          <Router>
+            <Switch>
+              <Route exact path="/">
                 <HomeContainer />
-              </CardsProvider>
-            </Route>
-          </Switch>
-        </Router>
-        <ToasterContainer />
-      </ThemeProvider>
-    </ToasterProvider>
+              </Route>
+            </Switch>
+          </Router>
+          <ToasterContainer />
+        </ThemeProvider>
+      </ToasterProvider>
+    </CardsProvider>
   );
 };
 
