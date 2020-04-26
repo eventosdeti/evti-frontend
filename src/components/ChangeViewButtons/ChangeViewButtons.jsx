@@ -8,6 +8,12 @@ const Wrapper = styled.div`
   justify-content: center;
 `;
 
+const Sticky = styled.div`
+  position: sticky;
+  top: 0rem;
+  background: white;
+`;
+
 const ChangeViewButton = ({
   view,
   viewTypes,
@@ -29,26 +35,28 @@ const ChangeViewButton = ({
   ]);
 
   return (
-    <Wrapper>
-      <Button
-        palette={`${(showAll && "primary") || "initial"}`}
-        onClick={onViewAll}
-      >
-        Tudo
-      </Button>
-      <Button
-        palette={`${(showCurrentMonth && "primary") || "initial"}`}
-        onClick={onViewCurrentMonth}
-      >
-        Este mês
-      </Button>
-      <Button
-        palette={`${(showNextMonth && "primary") || "initial"}`}
-        onClick={onViewNextMonth}
-      >
-        Próximo mês
-      </Button>
-    </Wrapper>
+    <Sticky>
+      <Wrapper>
+        <Button
+          palette={`${(showAll && "primary") || "initial"}`}
+          onClick={onViewAll}
+        >
+          Tudo
+        </Button>
+        <Button
+          palette={`${(showCurrentMonth && "primary") || "initial"}`}
+          onClick={onViewCurrentMonth}
+        >
+          Este mês
+        </Button>
+        <Button
+          palette={`${(showNextMonth && "primary") || "initial"}`}
+          onClick={onViewNextMonth}
+        >
+          Próximo mês
+        </Button>
+      </Wrapper>
+    </Sticky>
   );
 };
 
