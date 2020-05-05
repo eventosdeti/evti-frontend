@@ -2,14 +2,14 @@ import { useMemo, useState } from "react";
 
 const VIEW_TYPES = {
   ALL: {
-    key: "ALL"
+    key: "ALL",
+  },
+  CURRENT_DAY: {
+    key: "CURRENT_DAY",
   },
   CURRENT_MONTH: {
-    key: "CURRENT_MONTH"
+    key: "CURRENT_MONTH",
   },
-  NEXT_MONTH: {
-    key: "NEXT_MONTH"
-  }
 };
 
 const useCardsView = () => {

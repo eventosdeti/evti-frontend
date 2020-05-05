@@ -13,7 +13,7 @@ const ChangeViewButton = ({
   viewTypes,
   onViewAll,
   onViewCurrentMonth,
-  onViewNextMonth,
+  onViewCurrentDay,
 }) => {
   const showAll = React.useMemo(() => view === viewTypes.ALL.key, [
     view,
@@ -23,10 +23,10 @@ const ChangeViewButton = ({
     () => view === viewTypes.CURRENT_MONTH.key,
     [view, viewTypes]
   );
-  const showNextMonth = React.useMemo(() => view === viewTypes.NEXT_MONTH.key, [
-    view,
-    viewTypes,
-  ]);
+  const showCurrentDay = React.useMemo(
+    () => view === viewTypes.CURRENT_DAY.key,
+    [view, viewTypes]
+  );
 
   return (
     <Wrapper>
@@ -37,16 +37,16 @@ const ChangeViewButton = ({
         Tudo
       </Button>
       <Button
+        palette={`${(showCurrentDay && "primary") || "initial"}`}
+        onClick={onViewCurrentDay}
+      >
+        Hoje
+      </Button>
+      <Button
         palette={`${(showCurrentMonth && "primary") || "initial"}`}
         onClick={onViewCurrentMonth}
       >
         Este mês
-      </Button>
-      <Button
-        palette={`${(showNextMonth && "primary") || "initial"}`}
-        onClick={onViewNextMonth}
-      >
-        Próximo mês
       </Button>
     </Wrapper>
   );
