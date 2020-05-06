@@ -35,13 +35,13 @@ const ChangeViewButtonsContainer = () => {
     });
   }, [viewTypes, setView, showLoadingCards]);
 
-  const onViewNextMonth = React.useCallback(() => {
+  const onViewCurrentDay = React.useCallback(() => {
     showLoadingCards();
-    setView(viewTypes.NEXT_MONTH.key);
+    setView(viewTypes.CURRENT_DAY.key);
     ReactGA.event({
       category: "change_view",
-      action: "view_next_month",
-      label: viewTypes.NEXT_MONTH.key,
+      action: "view_current_day",
+      label: viewTypes.CURRENT_DAY.key,
     });
   }, [viewTypes, setView, showLoadingCards]);
 
@@ -51,7 +51,7 @@ const ChangeViewButtonsContainer = () => {
       viewTypes={viewTypes}
       onViewAll={onViewAll}
       onViewCurrentMonth={onViewCurrentMonth}
-      onViewNextMonth={onViewNextMonth}
+      onViewCurrentDay={onViewCurrentDay}
     />
   );
 };
