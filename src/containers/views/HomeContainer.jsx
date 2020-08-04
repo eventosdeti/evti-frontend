@@ -1,12 +1,12 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
 
 import View from "../../components/View";
 import EventCardsContainer from "../EventCardsContainer";
+import NavBarContainer from "../NavBarContainer";
 
 const HomeContainer = () => {
   return (
-    <View title="Eventos">
+    <View navBar={<NavBarContainer />}>
       <EventCardsContainer />
     </View>
   );

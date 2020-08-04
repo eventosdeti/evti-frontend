@@ -3,13 +3,15 @@ import ReactGA from "react-ga";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import GlobalStyles from "../components/GlobalStyles";
-import HomeContainer from "./views/HomeContainer";
 
+import HomeContainer from "./views/HomeContainer";
 import ToasterContainer from "./ToasterContainer";
+import EventCardFiltersModalContainer from "./EventCardFiltersModalContainer";
 
 import { ToasterProvider } from "../contexts/Toaster";
-import { CardsProvider } from "../contexts/Cards";
+import { EventCardsProvider } from "../contexts/EventCards";
 import { ThemeProvider } from "../contexts/Theme";
+import { EventCardFiltersModalProvider } from "../contexts/EventCardFiltersModal";
 
 const { REACT_APP_GA, NODE_ENV } = process.env;
 
@@ -21,21 +23,24 @@ const AppContainer = () => {
     }
   }, []);
   return (
-    <CardsProvider>
-      <ToasterProvider>
-        <ThemeProvider>
-          <GlobalStyles />
-          <Router>
-            <Switch>
-              <Route exact path="/">
-                <HomeContainer />
-              </Route>
-            </Switch>
-          </Router>
-          <ToasterContainer />
-        </ThemeProvider>
-      </ToasterProvider>
-    </CardsProvider>
+    <ToasterProvider>
+      <ThemeProvider>
+        <EventCardsProvider>
+          <EventCardFiltersModalProvider>
+            <GlobalStyles />
+            <Router>
+              <Switch>
+                <Route exact path="/">
+                  <HomeContainer />
+                </Route>
+              </Switch>
+            </Router>
+            <ToasterContainer />
+            <EventCardFiltersModalContainer />
+          </EventCardFiltersModalProvider>
+        </EventCardsProvider>
+      </ThemeProvider>
+    </ToasterProvider>
   );
 };
 

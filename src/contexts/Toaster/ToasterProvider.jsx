@@ -2,10 +2,7 @@ import React from "react";
 
 import Context from "./ToasterContext";
 
-const uuid = () =>
-  Math.random()
-    .toString(36)
-    .substr(2, 9);
+const uuid = () => Math.random().toString(36).substr(2, 9);
 
 const ToasterProvider = ({ children }) => {
   const [toasts, setToasts] = React.useState([]);
@@ -18,20 +15,19 @@ const ToasterProvider = ({ children }) => {
         {
           id,
           content,
-          duration
-        }
+          duration,
+        },
       ]);
       return id;
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
+    [setToasts, toasts]
   );
 
   const unqueueToast = React.useCallback(
-    ({ id }) => {
-      setToasts(toasts.filter(toast => toast.id !== id));
+    (id) => {
+      setToasts(toasts.filter((toast) => toast.id !== id));
     },
-    [toasts, setToasts]
+    [setToasts, toasts]
   );
 
   const value = { toasts, enqueueToast, unqueueToast };

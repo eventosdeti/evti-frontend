@@ -14,7 +14,8 @@ const GlobalStyles = createGlobalStyle`
 		font-family: Ubuntu;
 		padding: 0;
     margin: 0;
-    color: ${props => props.theme.palette.primaryTextColor}
+    scroll-behavior: smooth;
+    color: ${(props) => props.theme.palette.primaryTextColor};
 	};
 `;
 

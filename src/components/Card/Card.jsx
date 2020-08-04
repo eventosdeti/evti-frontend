@@ -1,7 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import { darken } from "polished";
-
 import { DEFAULT_PADDING } from "../../settings";
 
 const initial = css`
@@ -24,16 +23,20 @@ const tertiary = css`
 const Wrapper = styled.section`
   border-width: 1px;
   border-style: solid;
-  padding: 30px;
   border-radius: 5px;
-  margin: ${DEFAULT_PADDING};
+  padding: ${(props) => (props.padding && DEFAULT_PADDING) || "0"};
   ${(props) => props.palette === "initial" && initial};
   ${(props) => props.palette === "primary" && primary};
   ${(props) => props.palette === "tertiary" && tertiary};
 `;
 
-const Card = ({ palette = "initial", children, className }) => (
-  <Wrapper className={className} palette={palette}>
+const Card = ({
+  palette = "initial",
+  padding = false,
+  children,
+  className,
+}) => (
+  <Wrapper className={className} palette={palette} padding={padding}>
     {children}
   </Wrapper>
 );

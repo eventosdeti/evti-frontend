@@ -10,14 +10,15 @@ const Main = styled.main`
   min-height: 900px;
   margin: 0 auto;
   padding: ${DEFAULT_PADDING} 0;
-  max-width: 960px;
+  max-width: 800px;
   padding-left: ${DEFAULT_PADDING};
   padding-right: ${DEFAULT_PADDING};
 `;
 
-const View = ({ children }) => (
+const View = ({ children, navBar }) => (
   <Wrapper>
     <Header />
+    {navBar}
     <Main>{children}</Main>
     <Footer />
   </Wrapper>

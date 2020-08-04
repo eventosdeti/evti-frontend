@@ -1,38 +1,58 @@
 import React from "react";
 import styled from "styled-components";
+import { DEFAULT_PADDING } from "../../settings";
 
-import Loader from "../Loader";
 import Title from "../Title";
+import StyledCard from "../Card";
 
-const NoEvents = styled(Title).attrs(props => ({
+const Card = styled(StyledCard)`
+  margin-bottom: ${DEFAULT_PADDING};
+`;
+
+const NoEventsTitle = styled(Title).attrs((props) => ({
   size: 2,
-  tag: "p"
+  tag: "p",
 }))`
   display: flex;
   justify-content: center;
 `;
 
-const Wrapper = styled.div``;
+const EventsFilteredTitle = styled(Title)`
+  display: flex;
+  justify-content: center;
+`;
+
+const ClearFilters = styled.span`
+  color: ${(props) => props.theme.palette.primaryColor};
+  cursor: pointer;
+`;
+
+const Wrapper = styled.section`
+  position: relative;
+  opacity: ${(props) => (props.isLoadingCards && "0.01") || "1"};
+`;
 
 const EventCards = ({
   cards = [],
-  showLoading = true,
-  changeViewButtons,
-  eventCardRender
+  isLoadingCards = true,
+  isFiltered = false,
+  clearFilters,
+  eventCardRender,
 }) => {
   return (
-    <Wrapper>
-      {changeViewButtons}
-      {showLoading ? (
-        <Loader />
+    <Wrapper isLoadingCards={isLoadingCards}>
+      {isFiltered && (
+        <EventsFilteredTitle size={3}>
+          Os eventos estão filtrados
+          <ClearFilters onClick={clearFilters}>(limpar)</ClearFilters>
+        </EventsFilteredTitle>
+      )}
+      {cards.length === 0 && !isLoadingCards ? (
+        <Card>
+          <NoEventsTitle>Não há eventos</NoEventsTitle>
+        </Card>
       ) : (
-        <>
-          {cards.length > 0 ? (
-            <>{eventCardRender && cards.map(eventCardRender)}</>
-          ) : (
-            <NoEvents title="Não há eventos" />
-          )}
-        </>
+        eventCardRender && cards.map(eventCardRender)
       )}
     </Wrapper>
   );

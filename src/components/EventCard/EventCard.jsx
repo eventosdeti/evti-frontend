@@ -1,37 +1,64 @@
 import React from "react";
-import styled from "styled-components";
-import Card from "../Card";
-import CardHeader from "../CardHeader";
+import styled, { css } from "styled-components";
+
+import EventCardLabels from "../EventCardLabels";
+
+import StyledCard from "../Card";
+import StyledCardHeader from "../CardHeader";
+import CardBody from "../CardBody";
 import CardFooter from "../CardFooter";
 
 import Title from "../Title";
 import Button from "../Button";
 
-const Header = styled(CardHeader)`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const Date = styled.div`
+const datetime = css`
   text-transform: uppercase;
   font-weight: bold;
   color: ${(props) => props.theme.palette.primaryColor};
-  font-size: 0.7rem;
+  font-size: 0.9rem;
   ${(props) => props.theme.mediaQueries.medium`
-    font-size: 1rem;
-  `}
+  font-size: 1rem;
+`}
 `;
 
-const EventCard = ({ id, name, due, desc, moreInfoUrl }) => {
+const Card = styled(StyledCard).attrs((props) => ({
+  isCollapsed: true,
+}))``;
+
+const CardHeader = styled(StyledCardHeader)`
+  justify-content: space-between;
+`;
+
+const DueDate = styled.div`
+  ${datetime}
+`;
+
+const DueTime = styled.div`
+  ${datetime}
+`;
+
+const EventCard = ({
+  name,
+  dueDate,
+  dueTime,
+  desc,
+  labels,
+  onClickLabel,
+  moreInfoUrl,
+}) => {
   return (
     <Card>
-      <Header>
-        <Date>{due}</Date>
-      </Header>
-      <Title title={name} size={1} />
-      <div dangerouslySetInnerHTML={{ __html: desc }} />
+      <CardHeader>
+        <DueDate>{dueDate}</DueDate>
+        <DueTime>{dueTime}</DueTime>
+      </CardHeader>
+      <CardBody>
+        <Title size={1}>{name}</Title>
+        <div dangerouslySetInnerHTML={{ __html: desc }} />
+        <EventCardLabels labels={labels} onClickLabel={onClickLabel} />
+      </CardBody>
       <CardFooter>
-        <Button size="small" as="a" href={moreInfoUrl}>
+        <Button size="tiny" as="a" href={moreInfoUrl}>
           Mais informações
         </Button>
       </CardFooter>
@@ -39,4 +66,4 @@ const EventCard = ({ id, name, due, desc, moreInfoUrl }) => {
   );
 };
 
-export default EventCard;
+export default React.memo(EventCard);

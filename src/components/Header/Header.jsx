@@ -1,38 +1,47 @@
 import React from "react";
 import styled from "styled-components";
-import { darken } from "polished";
 
 import StledTitle from "../Title";
 
-import { DEFAULT_PADDING, GREY_LIGHTER_COLOR } from "../../settings";
+import { DEFAULT_PADDING } from "../../settings";
 
 const Title = styled(StledTitle)`
-  color: ${props => props.theme.palette.secondaryTextColor};
+  color: inherit;
   font-weight: bold;
-  margin: 0 0 0.5rem 0;
+  margin: 0;
+  line-height: 1.5;
+  text-transform: lowercase;
+  font-size: 2rem;
+  ${(props) => props.theme.mediaQueries.medium`
+    font-size: 2.5rem;
+  `}
 `;
 
 const Description = styled.p`
-  color: ${props => props.theme.palette.initialColor};
+  color: inherit;
   margin: 0;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  ${(props) => props.theme.mediaQueries.medium`
+    font-size: 0.8rem;
+  `}
 `;
 
 const Wrapper = styled.header`
+  color: #fff;
   min-height: 120px;
   align-items: center;
   display: flex;
-  background-color: ${props => props.theme.palette.primaryColor};
-  border-bottom: 1px solid ${props => darken(0.05, GREY_LIGHTER_COLOR)};
-  justify-content: space-between;
-  padding: 0 ${DEFAULT_PADDING};
+  flex-direction: column;
+  justify-content: center;
+  background-color: ${(props) => props.theme.palette.primaryColor};
+  padding: ${DEFAULT_PADDING};
 `;
 
 const Header = () => (
   <Wrapper>
-    <div>
-      <Title title="Eventos de T.I" size={2} />
-      <Description> Página dos eventos de tecnologia do Ceará</Description>
-    </div>
+    <Title size={2}>eventos de t.i</Title>
+    <Description> Página dos eventos de tecnologia</Description>
   </Wrapper>
 );
 

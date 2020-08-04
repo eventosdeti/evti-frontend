@@ -11,19 +11,20 @@ const Wrapper = styled(Card)`
   justify-content: space-between;
   align-items: center;
   padding: 10px 15px;
+  margin: 5px;
 `;
 
-const Toast = ({ id, content, duration = 5000, unqueueToast }) => {
-  const onClick = React.useCallback(() => {
+const Toast = ({ id, content, duration = 3000, unqueueToast }) => {
+  const onClick = () => {
     if (unqueueToast) {
-      unqueueToast({ id });
+      unqueueToast(id);
     }
-  }, [id, unqueueToast]);
+  };
 
   React.useEffect(() => {
-    const timeout = setTimeout(() => unqueueToast({ id }), duration);
+    const timeout = setTimeout(() => unqueueToast(id), duration);
     return () => clearTimeout(timeout);
-  }, [id, duration, unqueueToast]);
+  }, [duration, id, unqueueToast]);
 
   return (
     <Wrapper palette="tertiary">

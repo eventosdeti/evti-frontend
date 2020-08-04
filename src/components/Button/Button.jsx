@@ -13,7 +13,7 @@ const base = css`
   padding: 0.9em 1.2em;
   font-weight: 400;
   white-space: nowrap;
-  margin: 5px;
+  margin: 0.2em;
   align-self: center;
 `;
 
@@ -147,4 +147,4 @@ const Button = ({
   </Wrapper>
 );
 
-export default Button;
+export default React.memo(Button);

@@ -29,7 +29,7 @@ export const mediaQueries = Object.keys(mediaSizes).reduce((acc, size) => {
 export const palette = {
   initialColor: GREY_LIGHTER_COLOR,
   primaryColor: "#0079bf",
-  secondaryColor: "#D7C56F",
+  secondaryColor: "#00ca64",
   tertiaryColor: BLACK_COLOR,
   primaryTextColor: GREY_DARKER_COLOR,
   secondaryTextColor: GREY_LIGHTER_COLOR,

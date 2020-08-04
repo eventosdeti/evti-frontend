@@ -1,29 +1,36 @@
 import React from "react";
 
 import EventCards from "../components/EventCards";
-
 import EventCardContainer from "./EventCardContainer";
-
-import ChangeViewButtonsContainer from "./ChangeViewButtonsContainer";
-import { useCardsContext } from "../contexts/Cards";
-import useFetch from "../hooks/useFetch";
-
-const { REACT_APP_TRELLO_BOARD_JSON_URI } = process.env;
+import { useEventCardsContext } from "../contexts/EventCards";
 
 const eventCardRender = (card) => (
   <EventCardContainer key={card.id} {...card} />
 );
 
 const EventCardsContainer = () => {
-  const { dateFilteredCards, isLoadingCards } = useCardsContext();
+  const {
+    state: eventCardsSstate,
+    dispatch: eventsCardDispatch,
+  } = useEventCardsContext();
+
+  const isLoadingCards = eventCardsSstate.matches("loadCards.loading");
+  const isFiltered = eventCardsSstate.matches("filterCardsLabels.filtered");
+
+  const clearFilters = () => {
+    eventsCardDispatch("CLEAR_FILTER_CARD_LABELS");
+  };
 
   return (
-    <EventCards
-      cards={dateFilteredCards}
-      showLoading={isLoadingCards}
-      changeViewButtons={<ChangeViewButtonsContainer />}
-      eventCardRender={eventCardRender}
-    />
+    <>
+      <EventCards
+        cards={eventCardsSstate.context.cards}
+        isLoadingCards={isLoadingCards}
+        isFiltered={isFiltered}
+        clearFilters={clearFilters}
+        eventCardRender={eventCardRender}
+      />
+    </>
   );
 };
 

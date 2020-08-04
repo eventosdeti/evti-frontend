@@ -3,20 +3,34 @@ import styled from "styled-components";
 
 import { DEFAULT_PADDING, GREY_DARKER_COLOR } from "../../settings";
 
+import sails from "../../assets/images/sails.svg";
+
 const Wrapper = styled.footer`
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 ${DEFAULT_PADDING};
+  padding: ${DEFAULT_PADDING};
   background-color: ${GREY_DARKER_COLOR};
   color: ${(props) => props.theme.palette.secondaryTextColor};
   min-height: 80px;
 `;
 
+const Paragraph = styled.p`
+  margin: 0.5em 0;
+  > a {
+    color: #fff;
+  }
+`;
+
 const Footer = () => (
   <Wrapper>
-    <div>2020</div>
-    <p>github.com/Eventos-de-TI</p>
+    <Paragraph>eventosdeti</Paragraph>
+    <Paragraph>
+      <a href="https://linktr.ee/eventosdeti">linktr.ee/eventosdeti</a>
+    </Paragraph>
+    <Paragraph>
+      made in Ceará <img src={sails} alt="sails" widt="20" height="20" />
+    </Paragraph>
   </Wrapper>
 );
 
