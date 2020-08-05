@@ -11,6 +11,8 @@ import CardFooter from "../CardFooter";
 import Title from "../Title";
 import Button from "../Button";
 
+import { DEFAULT_PADDING } from "../../settings";
+
 const datetime = css`
   text-transform: uppercase;
   font-weight: bold;
@@ -23,7 +25,9 @@ const datetime = css`
 
 const Card = styled(StyledCard).attrs((props) => ({
   isCollapsed: true,
-}))``;
+}))`
+  margin-bottom: ${DEFAULT_PADDING};
+`;
 
 const CardHeader = styled(StyledCardHeader)`
   justify-content: space-between;
