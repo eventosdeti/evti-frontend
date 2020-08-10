@@ -62,7 +62,13 @@ const EventCard = ({
         <EventCardLabels labels={labels} onClickLabel={onClickLabel} />
       </CardBody>
       <CardFooter>
-        <Button size="tiny" as="a" href={moreInfoUrl}>
+        <Button
+          size="tiny"
+          as="a"
+          href={moreInfoUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           Mais informações
         </Button>
       </CardFooter>

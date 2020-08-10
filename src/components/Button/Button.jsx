@@ -129,20 +129,10 @@ const Button = ({
   palette = "initial",
   size = "small",
   disabled = false,
-  onClick,
   as = "button",
-  href,
-  className,
+  ...rest
 }) => (
-  <Wrapper
-    className={className}
-    palette={palette}
-    size={size}
-    as={as}
-    href={href}
-    disabled={disabled}
-    onClick={onClick}
-  >
+  <Wrapper palette={palette} size={size} as={as} disabled={disabled} {...rest}>
     {children}
   </Wrapper>
 );
