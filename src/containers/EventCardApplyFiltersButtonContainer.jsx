@@ -13,7 +13,10 @@ const EventCardApplyFiltersButtonContainer = () => {
     dispatch: eventCardsDispatch,
   } = useEventCardsContext();
 
-  const { state: modalState } = useEventCardFiltersModalContext();
+  const {
+    state: modalState,
+    dispatch: modalDispatch,
+  } = useEventCardFiltersModalContext();
 
   const { enqueueToast } = useToasterContext();
 
@@ -37,6 +40,7 @@ const EventCardApplyFiltersButtonContainer = () => {
     enqueueToast({
       content: "Aplicando filtros",
     });
+    modalDispatch("CLOSE_MODAL");
   };
 
   return (
