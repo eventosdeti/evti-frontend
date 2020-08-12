@@ -39,14 +39,26 @@ const EventCardFilterLabelsSection = ({
     );
   }, [labels, selectedLabels, setSelectableLabels]);
 
+  const childrenTest = (text) => {
+    let n = text.search(/mulheres/i);
+
+    if (n !== -1) {
+      return true;
+    }
+
+    return false;
+  };
+
   return (
     <Wrapper>
       {selectableLabels.map((label) => {
+        const test = childrenTest(label.name);
         if (label.isSelected) {
+          console.log(label, "label");
           return (
             <Label
               key={label.id}
-              palette="primary"
+              palette={test ? "tertiarySelected" : "primary"}
               onClose={onDeselectLabelHandler(label)}
             >
               {label.name}
@@ -54,7 +66,11 @@ const EventCardFilterLabelsSection = ({
           );
         }
         return (
-          <Label key={label.id} onClick={onSelectLabelHandler(label)}>
+          <Label
+            key={label.id}
+            palette={test ? "tertiary" : "initial"}
+            onClick={onSelectLabelHandler(label)}
+          >
             {label.name}
           </Label>
         );

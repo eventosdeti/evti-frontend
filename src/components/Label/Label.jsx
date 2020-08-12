@@ -12,6 +12,17 @@ const primary = css`
   background-color: ${(props) => props.theme.palette.primaryColor};
 `;
 
+const tertiary = css`
+  color: ${(props) => props.theme.palette.tertiaryTextColor};
+  background-color: ${(props) => props.theme.palette.initialColor};
+  border: 1px solid ${(props) => props.theme.palette.tertiaryTextColor};
+`;
+
+const tertiarySelected = css`
+  color: #ffffff;
+  background-color: ${(props) => props.theme.palette.tertiaryTextColor};
+`;
+
 const Wrapper = styled.span`
   display: inline-flex;
   align-items: stretch;
@@ -22,6 +33,8 @@ const Wrapper = styled.span`
   overflow: hidden;
   ${(props) => props.palette === "initial" && initial};
   ${(props) => props.palette === "primary" && primary};
+  ${(props) => props.palette === "tertiary" && tertiary};
+  ${(props) => props.palette === "tertiarySelected" && tertiarySelected};
 `;
 
 const DeleteIconWrapper = styled.span`

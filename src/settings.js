@@ -33,4 +33,5 @@ export const palette = {
   tertiaryColor: BLACK_COLOR,
   primaryTextColor: GREY_DARKER_COLOR,
   secondaryTextColor: GREY_LIGHTER_COLOR,
+  tertiaryTextColor: "#993399",
 };
