@@ -54,7 +54,6 @@ const EventCardFilterLabelsSection = ({
       {selectableLabels.map((label) => {
         const test = childrenTest(label.name);
         if (label.isSelected) {
-          console.log(label, "label");
           return (
             <Label
               key={label.id}
