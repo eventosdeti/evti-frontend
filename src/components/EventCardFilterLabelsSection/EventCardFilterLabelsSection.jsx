@@ -39,25 +39,20 @@ const EventCardFilterLabelsSection = ({
     );
   }, [labels, selectedLabels, setSelectableLabels]);
 
-  const childrenTest = (text) => {
-    let n = text.search(/mulheres/i);
-
-    if (n !== -1) {
-      return true;
-    }
-
-    return false;
-  };
+  const isWomanInTechLabel = (labelName = "") =>
+    /^mulheres\s*na\s*t.*i$/gi.test(labelName);
 
   return (
     <Wrapper>
       {selectableLabels.map((label) => {
-        const test = childrenTest(label.name);
         if (label.isSelected) {
           return (
             <Label
               key={label.id}
-              palette={test ? "tertiarySelected" : "primary"}
+              palette={
+                (isWomanInTechLabel(label.name) && "womenInTechSelected") ||
+                "primary"
+              }
               onClose={onDeselectLabelHandler(label)}
             >
               {label.name}
@@ -67,7 +62,9 @@ const EventCardFilterLabelsSection = ({
         return (
           <Label
             key={label.id}
-            palette={test ? "tertiary" : "initial"}
+            palette={
+              (isWomanInTechLabel(label.name) && "womenInTech") || "initial"
+            }
             onClick={onSelectLabelHandler(label)}
           >
             {label.name}
