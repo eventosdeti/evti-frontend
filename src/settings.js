@@ -8,6 +8,8 @@ export const DEFAULT_PADDING = "15px";
 export const GREY_LIGHTER_COLOR = "#e1e1e1";
 export const GREY_DARKER_COLOR = "#333";
 export const BLACK_COLOR = "#1c2124";
+export const PURPLE_LIGHTER_COLOR = "#e6d0f1";
+export const PURPLE_COLOR = "#76509e";
 
 export const mediaSizes = {
   small: "screen and (max-width: 39.9375rem)",

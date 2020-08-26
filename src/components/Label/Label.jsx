@@ -2,6 +2,8 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { Close } from "@styled-icons/evaicons-solid";
 
+import { PURPLE_COLOR, PURPLE_LIGHTER_COLOR } from "../../settings";
+
 const initial = css`
   color: ${(props) => props.theme.palette.primaryTextColor};
   background-color: ${(props) => props.theme.palette.initialColor};
@@ -10,6 +12,21 @@ const initial = css`
 const primary = css`
   color: ${(props) => props.theme.palette.initialColor};
   background-color: ${(props) => props.theme.palette.primaryColor};
+`;
+
+const tertiary = css`
+  color: ${(props) => props.theme.palette.initialColor};
+  background-color: ${(props) => props.theme.palette.initialColor};
+`;
+
+const womenInTech = css`
+  color: ${PURPLE_COLOR};
+  background-color: ${PURPLE_LIGHTER_COLOR};
+`;
+
+const womenInTechSelected = css`
+  color: ${PURPLE_LIGHTER_COLOR};
+  background-color: ${PURPLE_COLOR};
 `;
 
 const Wrapper = styled.span`
@@ -22,6 +39,9 @@ const Wrapper = styled.span`
   overflow: hidden;
   ${(props) => props.palette === "initial" && initial};
   ${(props) => props.palette === "primary" && primary};
+  ${(props) => props.palette === "tertiary" && tertiary};
+  ${(props) => props.palette === "womenInTech" && womenInTech};
+  ${(props) => props.palette === "womenInTechSelected" && womenInTechSelected};
 `;
 
 const DeleteIconWrapper = styled.span`
@@ -48,7 +68,7 @@ const Text = styled.span`
   `}
 `;
 
-const Label = ({ children, onClick, onClose, palette = "initial" }) => {
+const Label = ({ children, onClick, onClose, palette = "womenInTech" }) => {
   return (
     <Wrapper palette={palette}>
       <Text onClick={onClick}>{children}</Text>
