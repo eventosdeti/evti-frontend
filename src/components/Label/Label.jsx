@@ -68,7 +68,7 @@ const Text = styled.span`
   `}
 `;
 
-const Label = ({ children, onClick, onClose, palette = "womenInTech" }) => {
+const Label = ({ children, onClick, onClose, palette = "initial" }) => {
   return (
     <Wrapper palette={palette}>
       <Text onClick={onClick}>{children}</Text>
