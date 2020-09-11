@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { DEFAULT_PADDING } from "../../settings";
 
-const Wrapper = styled.header`
+const Wrapper = styled.footer`
   padding: ${DEFAULT_PADDING};
   border-top: 1px solid ${(props) => props.theme.palette.initialColor};
 `;

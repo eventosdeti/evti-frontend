@@ -19,6 +19,11 @@ const tertiary = css`
   background-color: ${(props) => props.theme.palette.initialColor};
 `;
 
+const danger = css`
+  color: ${(props) => props.theme.palette.initialColor};
+  background-color: ${(props) => props.theme.palette.dangerColor};
+`;
+
 const womenInTech = css`
   color: ${PURPLE_COLOR};
   background-color: ${PURPLE_LIGHTER_COLOR};
@@ -40,6 +45,7 @@ const Wrapper = styled.span`
   ${(props) => props.palette === "initial" && initial};
   ${(props) => props.palette === "primary" && primary};
   ${(props) => props.palette === "tertiary" && tertiary};
+  ${(props) => props.palette === "danger" && danger};
   ${(props) => props.palette === "womenInTech" && womenInTech};
   ${(props) => props.palette === "womenInTechSelected" && womenInTechSelected};
 `;
