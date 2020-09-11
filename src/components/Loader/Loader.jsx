@@ -29,6 +29,12 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  min-height: 40px;
+  padding: 0 15px;
+  border-radius: 50px;
+  background-color: #fff;
+  border: 1px solid ${(props) => props.theme.palette.initialColor};
+  box-shadow: 0 0 15px ${(props) => props.theme.palette.initialColor};
   ${orientation};
 `;
 
@@ -47,9 +53,9 @@ const SVG = styled.svg`
 const Loader = ({
   title = "Carregando...",
   orientation = "horizontal",
-  className,
   size = 24,
   color,
+  className,
 }) => (
   <Wrapper orientation={orientation} className={className}>
     <SVG
