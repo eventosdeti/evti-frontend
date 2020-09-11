@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import GlobalStyles from "../components/GlobalStyles";
 
 import HomeContainer from "./views/HomeContainer";
+import CardViewContainer from "./views/CardViewContainer";
 import ToasterContainer from "./ToasterContainer";
 import EventCardFiltersModalContainer from "./EventCardFiltersModalContainer";
 
@@ -32,6 +33,9 @@ const AppContainer = () => {
               <Switch>
                 <Route exact path="/">
                   <HomeContainer />
+                </Route>
+                <Route path="/eventos/:shortLink">
+                  <CardViewContainer />
                 </Route>
               </Switch>
             </Router>
