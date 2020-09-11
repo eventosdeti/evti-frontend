@@ -29,7 +29,7 @@ const ClearFilters = styled.span`
 
 const Wrapper = styled.section`
   position: relative;
-  opacity: ${(props) => (props.isLoadingCards && "0.01") || "1"};
+  opacity: ${(props) => (props.isLoadingCards && "0.5") || "1"};
 `;
 
 const EventCards = ({
