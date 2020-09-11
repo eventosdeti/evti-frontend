@@ -74,9 +74,15 @@ const Text = styled.span`
   `}
 `;
 
-const Label = ({ children, onClick, onClose, palette = "initial" }) => {
+const Label = ({
+  children,
+  onClick,
+  onClose,
+  palette = "initial",
+  className,
+}) => {
   return (
-    <Wrapper palette={palette}>
+    <Wrapper palette={palette} className={className}>
       <Text onClick={onClick}>{children}</Text>
       {onClose && (
         <DeleteIconWrapper onClick={onClose}>
