@@ -61,6 +61,7 @@ const setFilterCardsPeriod = assign({
 });
 
 const applyFilterAndSetCards = assign({
+  allCards: (ctx) => ctx.fetchCardsData?.cards || ctx.allCards,
   cards: (ctx) => {
     if (ctx.fetchCardsData?.cards) {
       let cards = filterValidCards(ctx.fetchCardsData.cards);
@@ -87,6 +88,7 @@ const eventCardsMachine = Machine(
     type: "parallel",
     context: {
       labels: [],
+      allCards: [],
       cards: [],
       filterCardsPeriod: "day",
       filterCardsLabels: [],
