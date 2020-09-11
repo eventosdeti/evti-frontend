@@ -30,11 +30,17 @@ const Card = styled(StyledCard).attrs((props) => ({
   max-width: 80%;
   border-radius: 5px;
   box-shadow: 0 0 30px ${GREY_DARKER_COLOR};
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 30;
 `;
 
-const Modal = ({ title, footer, children, onClose }) => {
+const Modal = ({ title, footer, children, onClose, EscPress }) => {
   return (
-    <ModalBackdrop>
+    <>
+      <ModalBackdrop onClick={onClose} />
       <Card>
         <ModalHeader>
           <ModalTitle>{title}</ModalTitle>
@@ -43,7 +49,7 @@ const Modal = ({ title, footer, children, onClose }) => {
         {children && <div>{children}</div>}
         {footer}
       </Card>
-    </ModalBackdrop>
+    </>
   );
 };
 

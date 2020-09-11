@@ -6,6 +6,7 @@ import EventCardApplyFiltersButtonContainer from "./EventCardApplyFiltersButtonC
 
 import { useEventCardsContext } from "../contexts/EventCards";
 import { useEventCardFiltersModalContext } from "../contexts/EventCardFiltersModal";
+import { useKeyPress } from "../hooks/useKeyPress";
 
 const EventCardFiltersModalContainer = () => {
   const { state: eventCardsState } = useEventCardsContext();
@@ -20,6 +21,8 @@ const EventCardFiltersModalContainer = () => {
   const onClose = React.useCallback(() => {
     modalDispatch("CLOSE_MODAL");
   }, [modalDispatch]);
+
+  useKeyPress("Escape", onClose);
 
   React.useEffect(() => {
     if (isOpen) {
