@@ -10,6 +10,7 @@ import CardFooter from "../CardFooter";
 
 import Title from "../Title";
 import Button from "../Button";
+import StyledLabel from "../Label";
 
 import { DEFAULT_PADDING } from "../../settings";
 
@@ -33,12 +34,26 @@ const CardHeader = styled(StyledCardHeader)`
   justify-content: space-between;
 `;
 
+const CardHeaderLeftArea = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const CardHeaderRightArea = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 const DueDate = styled.div`
   ${datetime}
 `;
 
 const DueTime = styled.div`
   ${datetime}
+`;
+
+const Label = styled(StyledLabel)`
+  margin-left: ${DEFAULT_PADDING};
 `;
 
 const EventCard = ({
@@ -49,12 +64,18 @@ const EventCard = ({
   labels,
   onClickLabel,
   moreInfoUrl,
+  expired = false,
 }) => {
   return (
     <Card>
       <CardHeader>
-        <DueDate>{dueDate}</DueDate>
-        <DueTime>{dueTime}</DueTime>
+        <CardHeaderLeftArea>
+          <DueDate>{dueDate}</DueDate>
+          {expired && <Label palette="danger">O evento já ocorreu</Label>}
+        </CardHeaderLeftArea>
+        <CardHeaderRightArea>
+          <DueTime>{dueTime}</DueTime>
+        </CardHeaderRightArea>
       </CardHeader>
       <CardBody>
         <Title size={1}>{name}</Title>
