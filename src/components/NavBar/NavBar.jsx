@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import Loader from "../Loader";
-
+import StyledContainer from "../Container";
 import { DEFAULT_PADDING } from "../../settings";
 
 const Wrapper = styled.nav`
@@ -30,15 +30,16 @@ const LoaderWrapper = styled.div`
   min-height: 40px;
   padding: 0 15px;
   border-radius: 50px;
-  background-color: #fff;
-  border: 1px solid ${(props) => props.theme.palette.initialColor};
-  box-shadow: 0 0 15px ${(props) => props.theme.palette.initialColor};
+`;
+
+const Container = styled(StyledContainer)`
+  justify-content: center;
 `;
 
 const NavBar = ({ showLoading = false, sticky = true, children }) => {
   return (
     <Wrapper sticky={sticky}>
-      {children}
+      <Container>{children}</Container>
       {showLoading && (
         <LoaderWrapper>
           <Loader />
