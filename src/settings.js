@@ -1,6 +1,8 @@
 import { css } from "styled-components";
 
-export const FONT_BASE = "'10";
+export const FONT_BASE = 10;
+export const ROOT_FONT_SIZE = "62.5%";
+
 export const pixelToRem = (px, base = FONT_BASE) => `${(1 / base) * px}rem`;
 
 export const DEFAULT_PADDING = "15px";
