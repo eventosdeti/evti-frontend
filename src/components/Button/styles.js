@@ -1,5 +1,6 @@
 import { css } from "styled-components";
-import { darken, lighten, transparentize } from "polished";
+import { darken, transparentize } from "polished";
+import { pixelToRem } from "../../settings";
 
 export const base = css`
   border-radius: 5px;
@@ -9,10 +10,10 @@ export const base = css`
   border-width: 1px;
   border-style: solid;
   text-transform: uppercase;
-  padding: 0.9em 1.2em;
+  padding: ${pixelToRem(8)} ${pixelToRem(12)};
   font-weight: 400;
   white-space: nowrap;
-  margin: 0.2em;
+  margin: ${pixelToRem(2)};
   align-self: center;
 `;
 
@@ -29,22 +30,22 @@ export const size = css`
   ${(props) =>
     props.size === "tiny" &&
     `
-font-size:0.7em;
+  font-size:${pixelToRem(7)}
 `};
   ${(props) =>
     props.size === "small" &&
     `
-  font-size:0.8em;
+  font-size:${pixelToRem(8)}
 `};
   ${(props) =>
     props.size === "medium" &&
     `
-  font-size: 1em;
+  font-size: ${pixelToRem(10)}
 `};
   ${(props) =>
     props.size === "large" &&
     `
-  font-size: 1.2em;
+  font-size: ${pixelToRem(12)}
 `};
 `;
 
