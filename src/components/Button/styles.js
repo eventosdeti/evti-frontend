@@ -10,7 +10,7 @@ export const base = css`
   border-width: 1px;
   border-style: solid;
   text-transform: uppercase;
-  padding: ${pixelToRem(8)} ${pixelToRem(12)};
+  padding: 0.9em 1.2em;
   font-weight: 400;
   white-space: nowrap;
   margin: ${pixelToRem(2)};
