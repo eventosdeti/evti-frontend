@@ -1,48 +1,35 @@
 import React from "react";
 import styled from "styled-components";
 
-import StyledCard from "../Card";
+import Card from "../Card";
 import ModalHeader from "../ModalHeader";
 
 import ModalTitle from "../ModalTitle";
 import ModalCloseButton from "../ModalCloseButton";
 
-import { GREY_DARKER_COLOR } from "../../settings";
+import { wrapperBase, backdropBase } from "./styles";
 
 const ModalBackdrop = styled.div`
-  position: fixed;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.8);
-  z-index: 2;
+  ${backdropBase};
 `;
 
-const Card = styled(StyledCard).attrs((props) => ({
+const Wrapper = styled(Card).attrs((props) => ({
   isCollapsed: true,
 }))`
-  min-width: 300px;
-  width: 600px;
-  max-width: 80%;
-  border-radius: 5px;
-  box-shadow: 0 0 30px ${GREY_DARKER_COLOR};
+  ${wrapperBase};
 `;
 
 const Modal = ({ title, footer, children, onClose }) => {
   return (
     <ModalBackdrop>
-      <Card>
+      <Wrapper>
         <ModalHeader>
           <ModalTitle>{title}</ModalTitle>
           <ModalCloseButton onClick={onClose} />
         </ModalHeader>
         {children && <div>{children}</div>}
         {footer}
-      </Card>
+      </Wrapper>
     </ModalBackdrop>
   );
 };
