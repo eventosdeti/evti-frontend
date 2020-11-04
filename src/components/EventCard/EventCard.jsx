@@ -1,59 +1,34 @@
 import React from "react";
-import styled, { css } from "styled-components";
-
-import EventCardLabels from "../EventCardLabels";
+import styled from "styled-components";
 
 import StyledCard from "../Card";
-import StyledCardHeader from "../CardHeader";
 import CardBody from "../CardBody";
-import CardFooter from "../CardFooter";
+
+import EventCardHeader from "../EventCardHeader";
+import EventCardFooter from "../EventCardFooter";
+import EventCardLabels from "../EventCardLabels";
 
 import Title from "../Title";
 import Button from "../Button";
-import StyledLabel from "../Label";
+import Label from "../Label";
 
-import { DEFAULT_PADDING } from "../../settings";
-
-const datetime = css`
-  text-transform: uppercase;
-  font-weight: bold;
-  color: ${(props) => props.theme.palette.primaryColor};
-  font-size: 0.9rem;
-  ${(props) => props.theme.mediaQueries.medium`
-  font-size: 1rem;
-`}
-`;
+import { DEFAULT_PADDING, pixelToRem } from "../../settings";
 
 const Card = styled(StyledCard).attrs((props) => ({
+  ...props,
   isCollapsed: true,
 }))`
   margin-bottom: ${DEFAULT_PADDING};
 `;
 
-const CardHeader = styled(StyledCardHeader)`
-  justify-content: space-between;
+const MoreInfoButton = styled(Button)`
+  margin-top: ${DEFAULT_PADDING};
+  margin-bottom: ${DEFAULT_PADDING};
 `;
 
-const CardHeaderLeftArea = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const CardHeaderRightArea = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const DueDate = styled.div`
-  ${datetime}
-`;
-
-const DueTime = styled.div`
-  ${datetime}
-`;
-
-const Label = styled(StyledLabel)`
-  margin-left: ${DEFAULT_PADDING};
+const Desc = styled.div`
+  font-size: ${pixelToRem(10)};
+  line-height: 1.5;
 `;
 
 const EventCard = ({
@@ -64,35 +39,35 @@ const EventCard = ({
   labels,
   onClickLabel,
   moreInfoUrl,
+  shortURL,
   expired = false,
 }) => {
   return (
     <Card>
-      <CardHeader>
-        <CardHeaderLeftArea>
-          <DueDate>{dueDate}</DueDate>
-          {expired && <Label palette="danger">O evento já ocorreu</Label>}
-        </CardHeaderLeftArea>
-        <CardHeaderRightArea>
-          <DueTime>{dueTime}</DueTime>
-        </CardHeaderRightArea>
-      </CardHeader>
+      <EventCardHeader expired={expired} dueDate={dueDate} dueTime={dueTime} />
       <CardBody>
-        <Title size={1}>{name}</Title>
-        <div dangerouslySetInnerHTML={{ __html: desc }} />
-        <EventCardLabels labels={labels} onClickLabel={onClickLabel} />
-      </CardBody>
-      <CardFooter>
-        <Button
+        {expired && <Label palette="danger">O evento já ocorreu</Label>}
+        <Title size={1} as="h2">
+          {name}
+        </Title>
+        <Desc dangerouslySetInnerHTML={{ __html: desc }} />
+        <MoreInfoButton
+          forwardedAs="a"
           size="tiny"
-          as="a"
+          palette="tertiary"
+          variant="outlined"
           href={moreInfoUrl}
           target="_blank"
           rel="noopener noreferrer"
         >
-          Mais informações
-        </Button>
-      </CardFooter>
+          Ir para o site do evento
+        </MoreInfoButton>
+        <EventCardLabels
+          labels={labels}
+          onClickLabel={(!expired && onClickLabel) || null}
+        />
+      </CardBody>
+      <EventCardFooter shortURL={shortURL} />
     </Card>
   );
 };
