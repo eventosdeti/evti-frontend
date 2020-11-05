@@ -1,29 +1,29 @@
 import React from "react";
 import styled from "styled-components";
 
-import StledTitle from "../Title";
+import { DEFAULT_PADDING, pixelToRem } from "../../settings";
 
-import { DEFAULT_PADDING } from "../../settings";
-
-const Title = styled(StledTitle)`
+const Title = styled.h1`
   color: inherit;
   font-weight: bold;
+  font-size: ${pixelToRem(16)};
   margin: 0;
   line-height: 1.5;
   text-transform: lowercase;
-  font-size: 2rem;
   ${(props) => props.theme.mediaQueries.medium`
-    font-size: 2.5rem;
+    font-size: ${pixelToRem(21)};
+  `}
+  ${(props) => props.theme.mediaQueries.large`
+    font-size: ${pixelToRem(24)};
   `}
 `;
 
 const Description = styled.p`
   color: inherit;
   margin: 0;
-  text-transform: uppercase;
-  font-size: 0.7rem;
+  font-size: ${pixelToRem(8)};
   ${(props) => props.theme.mediaQueries.medium`
-    font-size: 0.8rem;
+    font-size: ${pixelToRem(9)};
   `}
 `;
 
@@ -40,7 +40,7 @@ const Wrapper = styled.header`
 
 const Header = () => (
   <Wrapper>
-    <Title size={2}>eventos de t.i</Title>
+    <Title>eventos de t.i</Title>
     <Description> Página dos eventos de tecnologia</Description>
   </Wrapper>
 );
