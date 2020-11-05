@@ -1,16 +1,25 @@
 import React from "react";
-import NavBar from "../components/NavBar";
+import { useRouteMatch } from "react-router-dom";
 
+import NavBar from "../components/NavBar";
+import Button from "../components/Button";
 import EventCardPeriodFilterButtons from "../components/EventCardPeriodFilterButtons";
+
 import { useEventCardsContext } from "../contexts/EventCards";
 import { useEventCardFiltersModalContext } from "../contexts/EventCardFiltersModal";
 
+import { EVENT_DETAILS } from "../routes";
+
 const NavBarContainer = () => {
-  const {
-    state: eventCardsSstate,
-    dispatch: eventCardsDispatch,
-  } = useEventCardsContext();
-  const { dispatch: filtersModalDispatch } = useEventCardFiltersModalContext();
+  const { state: cardsState, dispatch: cardsDispatch } = useEventCardsContext();
+  const { dispatch: modalDispatch } = useEventCardFiltersModalContext();
+
+  const isOnEventDetailsRoute = useRouteMatch(EVENT_DETAILS);
+
+  const showLoading = cardsState.matches("loadCards.loading");
+  const disabled = cardsState.matches("loadCards.loading");
+  const filteredByLabels = cardsState.matches("filterLabels.filtered");
+  const selectedPeriod = cardsState.context.filterPeriod;
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -19,42 +28,42 @@ const NavBarContainer = () => {
     });
   };
 
-  const disabled = eventCardsSstate.matches("loadCards.loading");
-
-  const onViewAll = React.useCallback(() => {
+  const onSelectAllPeriods = React.useCallback(() => {
     scrollToTop();
-    eventCardsDispatch("FILTER_CARDS_BY_PERIOD", { data: "all" });
-  }, [eventCardsDispatch]);
+    cardsDispatch("SET_FILTER_PERIOD", { data: "all" });
+  }, [cardsDispatch]);
 
-  const onViewCurrentDay = React.useCallback(() => {
+  const onSelectDayPeriod = React.useCallback(() => {
     scrollToTop();
-    eventCardsDispatch("FILTER_CARDS_BY_PERIOD", { data: "day" });
-  }, [eventCardsDispatch]);
+    cardsDispatch("SET_FILTER_PERIOD", { data: "day" });
+  }, [cardsDispatch]);
 
-  const onViewCurrentMonth = React.useCallback(() => {
+  const onSelectMonthPeriod = React.useCallback(() => {
     scrollToTop();
-    eventCardsDispatch("FILTER_CARDS_BY_PERIOD", { data: "month" });
-  }, [eventCardsDispatch]);
+    cardsDispatch("SET_FILTER_PERIOD", { data: "month" });
+  }, [cardsDispatch]);
 
   const onEditFilters = React.useCallback(() => {
-    filtersModalDispatch("OPEN_MODAL");
-  }, [filtersModalDispatch]);
-
-  const filtered = eventCardsSstate.matches("filterCardsLabels.filtered");
-  const period = eventCardsSstate.value.filterCardsPeriod;
-  const showLoading = eventCardsSstate.matches("loadCards.loading");
+    modalDispatch("OPEN_MODAL");
+  }, [modalDispatch]);
 
   return (
     <NavBar showLoading={showLoading}>
-      <EventCardPeriodFilterButtons
-        period={period}
-        onViewAll={onViewAll}
-        onViewCurrentDay={onViewCurrentDay}
-        onViewCurrentMonth={onViewCurrentMonth}
-        onEditFilters={onEditFilters}
-        filtered={filtered}
-        disabled={disabled}
-      />
+      {(isOnEventDetailsRoute && (
+        <Button as="a" href="/">
+          Página inicial
+        </Button>
+      )) || (
+        <EventCardPeriodFilterButtons
+          selectedPeriod={selectedPeriod}
+          filteredByLabels={filteredByLabels}
+          disabled={disabled}
+          onSelectAllPeriods={onSelectAllPeriods}
+          onSelectDayPeriod={onSelectDayPeriod}
+          onSelectMonthPeriod={onSelectMonthPeriod}
+          onEditFilters={onEditFilters}
+        />
+      )}
     </NavBar>
   );
 };
