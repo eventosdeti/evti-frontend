@@ -3,37 +3,19 @@ import styled from "styled-components";
 
 import Loader from "../Loader";
 import StyledContainer from "../Container";
-import { DEFAULT_PADDING } from "../../settings";
+
+import { wrapperBase, loaderWrapperBase, containerBase } from "./styles";
 
 const Wrapper = styled.nav`
-  border-color: ${(props) => props.theme.palette.initialColor};
-  background-color: #fff;
-  border-style: solid;
-  border-left-width: 0;
-  border-top-width: 1px;
-  border-right-width: 0;
-  border-bottom-width: 1px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: ${DEFAULT_PADDING};
-  position: sticky;
-  top: 0;
-  z-index: 1;
+  ${wrapperBase};
 `;
 
 const LoaderWrapper = styled.div`
-  position: absolute;
-  display: flex;
-  top: 100%;
-  margin-top: 5px;
-  min-height: 40px;
-  padding: 0 15px;
-  border-radius: 50px;
+  ${loaderWrapperBase};
 `;
 
 const Container = styled(StyledContainer)`
-  justify-content: center;
+  ${containerBase};
 `;
 
 const NavBar = ({ showLoading = false, sticky = true, children }) => {
