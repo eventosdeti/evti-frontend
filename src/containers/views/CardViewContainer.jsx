@@ -1,33 +1,29 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 
+import NoEventsCard from "../../components/NoEventsCard";
 import View from "../../components/View";
-import Button from "../../components/Button";
-import NavBar from "../../components/NavBar";
 
+import NavBarContainer from "../NavBarContainer";
 import EventCardContainer from "../EventCardContainer";
 
 import { useEventCardsContext } from "../../contexts/EventCards";
 
 const CardViewContainer = () => {
   const { shortLink } = useParams();
+  const { state: cardsState } = useEventCardsContext();
 
-  const { state: eventCardsSstate } = useEventCardsContext();
-  const isLoadingCards = eventCardsSstate.matches("loadCards.loading");
-
-  const card = eventCardsSstate.context.allCards.find(
-    (card) => card.shortLink === shortLink
+  const card = cardsState.context.allCards.find(
+    (card) =>
+      (card.shortLink || "").toLowerCase() === (shortLink || "").toLowerCase()
   );
 
+  const isLoadingCards = cardsState.matches("loadCards.loading");
+
   return (
-    <View
-      navBar={
-        <NavBar showLoading={isLoadingCards}>
-          <Button>Ir para a página inicial</Button>
-        </NavBar>
-      }
-    >
-      {card && <EventCardContainer showLabels={false} {...card} />}
+    <View navBar={<NavBarContainer />}>
+      {!isLoadingCards &&
+        ((card && <EventCardContainer {...card} />) || <NoEventsCard />)}
     </View>
   );
 };
