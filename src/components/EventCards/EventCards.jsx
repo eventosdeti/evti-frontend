@@ -1,21 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { DEFAULT_PADDING } from "../../settings";
 
 import Title from "../Title";
-import StyledCard from "../Card";
-
-const Card = styled(StyledCard)`
-  margin-bottom: ${DEFAULT_PADDING};
-`;
-
-const NoEventsTitle = styled(Title).attrs((props) => ({
-  size: 2,
-  tag: "p",
-}))`
-  display: flex;
-  justify-content: center;
-`;
+import NoEventsCard from "../NoEventsCard";
 
 const EventsFilteredTitle = styled(Title)`
   display: flex;
@@ -48,9 +35,10 @@ const EventCards = ({
         </EventsFilteredTitle>
       )}
       {cards.length === 0 && !isLoadingCards ? (
-        <Card>
-          <NoEventsTitle>Não há eventos</NoEventsTitle>
-        </Card>
+        <NoEventsCard
+          title="Não há eventos"
+          description="Não há eventos para os filtros aplicados"
+        />
       ) : (
         eventCardRender && cards.map(eventCardRender)
       )}
