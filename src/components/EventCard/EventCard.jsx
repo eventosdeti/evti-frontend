@@ -40,13 +40,11 @@ const EventCard = ({
   onClickLabel,
   moreInfoUrl,
   shortURL,
-  expired = false,
 }) => {
   return (
     <Card>
-      <EventCardHeader expired={expired} dueDate={dueDate} dueTime={dueTime} />
+      <EventCardHeader dueDate={dueDate} dueTime={dueTime} />
       <CardBody>
-        {expired && <Label palette="danger">O evento já ocorreu</Label>}
         <Title size={1} as="h2">
           {name}
         </Title>
@@ -62,10 +60,7 @@ const EventCard = ({
         >
           Ir para o site do evento
         </MoreInfoButton>
-        <EventCardLabels
-          labels={labels}
-          onClickLabel={(!expired && onClickLabel) || null}
-        />
+        <EventCardLabels labels={labels} onClickLabel={onClickLabel} />
       </CardBody>
       <EventCardFooter shortURL={shortURL} />
     </Card>

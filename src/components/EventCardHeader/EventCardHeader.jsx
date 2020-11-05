@@ -2,9 +2,6 @@ import React from "react";
 import styled, { css } from "styled-components";
 
 import StyledCardHeader from "../CardHeader";
-import StyledLabel from "../Label";
-
-import { DEFAULT_PADDING } from "../../settings";
 
 const datetime = css`
   text-transform: uppercase;
@@ -38,19 +35,14 @@ const DueTime = styled.div`
   ${datetime}
 `;
 
-const Label = styled(StyledLabel)`
-  margin-left: ${DEFAULT_PADDING};
-`;
-
-const EventCardHeader = ({ expired = false, dueDate, dueTime }) => {
+const EventCardHeader = ({ dueDate, dueTime }) => {
   return (
     <CardHeader>
       <LeftArea>
         <DueDate>{dueDate}</DueDate>
-        <DueTime>{dueTime}</DueTime>
       </LeftArea>
       <RightArea>
-        {expired && <Label palette="danger">O evento já ocorreu</Label>}
+        <DueTime>{dueTime}</DueTime>
       </RightArea>
     </CardHeader>
   );
