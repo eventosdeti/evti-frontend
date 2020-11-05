@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { DEFAULT_PADDING, GREY_DARKER_COLOR } from "../../settings";
+import { DEFAULT_PADDING, GREY_DARKER_COLOR, pixelToRem } from "../../settings";
 
 import sails from "../../assets/images/sails.svg";
 
@@ -16,7 +16,8 @@ const Wrapper = styled.footer`
 `;
 
 const Paragraph = styled.p`
-  margin: 0.5em 0;
+  margin: 0.5rem 0;
+  font-size: ${pixelToRem(10)};
   > a {
     color: #fff;
   }
@@ -29,7 +30,7 @@ const Footer = () => (
       <a href="https://linktr.ee/eventosdeti">linktr.ee/eventosdeti</a>
     </Paragraph>
     <Paragraph>
-      made in Ceará <img src={sails} alt="sails" widt="20" height="20" />
+      Made in Ceará <img src={sails} alt="sails" widt="20" height="20" />
     </Paragraph>
   </Wrapper>
 );
