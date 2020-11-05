@@ -2,7 +2,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { Close } from "@styled-icons/evaicons-solid";
 
-import { PURPLE_COLOR, PURPLE_LIGHTER_COLOR } from "../../settings";
+import { PURPLE_COLOR, PURPLE_LIGHTER_COLOR, pixelToRem } from "../../settings";
 
 const initial = css`
   color: ${(props) => props.theme.palette.primaryTextColor};
@@ -38,7 +38,7 @@ const Wrapper = styled.span`
   display: inline-flex;
   align-items: stretch;
   text-transform: uppercase;
-  font-size: 0.8em;
+  font-size: ${pixelToRem(8)};
   border-radius: 5px;
   margin: 2px;
   overflow: hidden;
