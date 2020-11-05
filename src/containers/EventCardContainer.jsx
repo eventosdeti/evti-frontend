@@ -1,31 +1,41 @@
 import React from "react";
+import { useRouteMatch } from "react-router-dom";
 import EventCard from "../components/EventCard";
+
+import { EVENT_DETAILS } from "../routes";
 
 import { useEventCardFiltersModalContext } from "../contexts/EventCardFiltersModal";
 
-import useFormattedEventCardDueDate from "../contexts/EventCards/hooks/useFormattedEventCardDueDate";
-import useEventCardMoreInfoURL from "../contexts/EventCards/hooks/useEventCardMoreInfoURL";
-import useEventCardDescriptionResume from "../contexts/EventCards/hooks/useEventCardDescriptionResume";
-import useFormattedEventCardDescription from "../contexts/EventCards/hooks/useFormattedEventCardDescription";
+import {
+  useFormattedEventCardDueDate,
+  useEventCardMoreInfoURL,
+  useEventCardDescriptionResume,
+  useFormattedEventCardDescription,
+  useEventCardShortUrl,
+} from "../contexts/EventCards";
 
-const EventCardContainer = ({ due, desc, ...rest }) => {
-  const { dispatch: modalDispatch } = useEventCardFiltersModalContext();
+const EventCardContainer = ({ due, desc, shortLink, ...rest }) => {
+  const { dispatch } = useEventCardFiltersModalContext();
   const { date, time } = useFormattedEventCardDueDate(due);
   const moreInfoUrl = useEventCardMoreInfoURL(desc);
   const resume = useEventCardDescriptionResume(desc);
-  const formattedResume = useFormattedEventCardDescription(resume);
+  const formattedDescription = useFormattedEventCardDescription(resume);
+  const shortURL = useEventCardShortUrl(shortLink);
+
+  const isOnEventDetailsRoute = useRouteMatch(EVENT_DETAILS);
 
   const onClickLabel = React.useCallback(() => {
-    modalDispatch("OPEN_MODAL");
-  }, [modalDispatch]);
+    dispatch("OPEN_MODAL");
+  }, [dispatch]);
 
   return (
     <EventCard
       dueDate={date}
       dueTime={time}
       moreInfoUrl={moreInfoUrl}
-      desc={formattedResume}
-      onClickLabel={onClickLabel}
+      desc={formattedDescription}
+      onClickLabel={(!isOnEventDetailsRoute && onClickLabel) || null}
+      shortURL={shortURL}
       {...rest}
     />
   );
