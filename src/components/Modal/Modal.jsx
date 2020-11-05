@@ -24,7 +24,7 @@ const Modal = ({ title, footer, children, onClose }) => {
     <ModalBackdrop>
       <Wrapper>
         <ModalHeader>
-          <ModalTitle>{title}</ModalTitle>
+          {title && <ModalTitle>{title}</ModalTitle>}
           <ModalCloseButton onClick={onClose} />
         </ModalHeader>
         {children && <div>{children}</div>}
