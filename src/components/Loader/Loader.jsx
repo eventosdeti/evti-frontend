@@ -1,52 +1,25 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
-const orientation = css`
-  ${(props) => {
-    if (props.orientation === "vertical") {
-      return `
-      flex-direction: column;
-     `;
-    }
-    return `
-    flex-direction: row;
-   `;
-  }}
-`;
-
-const SVGorientation = css`
-  ${(props) => {
-    if (props.orientation === "horizontal") {
-      return `
-      margin-right: 5px;
-     `;
-    }
-  }}
-`;
+import {
+  wrapperBase,
+  orientation,
+  titleBase,
+  svgBase,
+  SVGorientation,
+} from "./styles";
 
 const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  min-height: 40px;
-  padding: 0 15px;
-  border-radius: 50px;
-  background-color: #fff;
-  border: 1px solid ${(props) => props.theme.palette.initialColor};
-  box-shadow: 0 0 15px ${(props) => props.theme.palette.initialColor};
+  ${wrapperBase};
   ${orientation};
 `;
 
 const Title = styled.p`
-  text-transform: uppercase;
-  font-size: 0.7em;
+  ${titleBase};
 `;
 
 const SVG = styled.svg`
-  fill: ${(props) => props.color || props.theme.palette.primaryColor};
-  width: ${(props) => props.size}px;
-  height: ${(props) => props.size}px;
+  ${svgBase};
   ${SVGorientation};
 `;
 
