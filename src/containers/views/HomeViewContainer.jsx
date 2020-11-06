@@ -4,7 +4,7 @@ import View from "../../components/View";
 import EventCardsContainer from "../EventCardsContainer";
 import NavBarContainer from "../NavBarContainer";
 
-const HomeContainer = () => {
+const HomeViewContainer = () => {
   return (
     <View navBar={<NavBarContainer />}>
       <EventCardsContainer />
@@ -12,4 +12,4 @@ const HomeContainer = () => {
   );
 };
 
-export default HomeContainer;
+export default HomeViewContainer;

@@ -1,46 +1,101 @@
 import React from "react";
 
 import EventCardFiltersModal from "../components/EventCardFiltersModal";
-import EventCardFilterSectionsListContainer from "./EventCardFilterSectionsListContainer";
-import EventCardApplyFiltersButtonContainer from "./EventCardApplyFiltersButtonContainer";
 
 import { useEventCardsContext } from "../contexts/EventCards";
 import { useEventCardFiltersModalContext } from "../contexts/EventCardFiltersModal";
+import { useToasterContext } from "../contexts/Toaster";
 
 const EventCardFiltersModalContainer = () => {
-  const { state: eventCardsState } = useEventCardsContext();
-
+  const { state: cardsState, dispatch: cardsDispatch } = useEventCardsContext();
   const {
-    state: modalSstate,
+    state: modalState,
     dispatch: modalDispatch,
   } = useEventCardFiltersModalContext();
 
-  const isOpen = modalSstate.matches("modalStatus.open");
+  const { enqueueToast } = useToasterContext();
 
-  const onClose = React.useCallback(() => {
+  const isOpen = modalState.matches("modalStatus.open");
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  const onClose = () => {
     modalDispatch("CLOSE_MODAL");
-  }, [modalDispatch]);
+  };
+
+  const onSelectAllPeriods = () => {
+    modalDispatch("SET_FILTER_PERIOD", { data: "all" });
+  };
+
+  const onSelectDayPeriod = () => {
+    modalDispatch("SET_FILTER_PERIOD", { data: "day" });
+  };
+
+  const onSelectMonthPeriod = () => {
+    modalDispatch("SET_FILTER_PERIOD", { data: "month" });
+  };
+
+  const onSelectLabel = (label) => {
+    modalDispatch("SET_FILTER_LABELS", {
+      data: [...modalState.context.filterLabels, label],
+    });
+  };
+
+  const onDeselectLabel = (label) => {
+    modalDispatch("SET_FILTER_LABELS", {
+      data: modalState.context.filterLabels.filter(
+        (selected) => selected.id !== label.id
+      ),
+    });
+  };
+
+  const onApplyFilters = () => {
+    scrollToTop();
+    cardsDispatch("SET_FILTER_PERIOD", {
+      data: modalState.context.filterPeriod,
+    });
+    cardsDispatch("SET_FILTER_LABELS", {
+      data: modalState.context.filterLabels,
+    });
+    enqueueToast({
+      content: "Aplicando filtros",
+    });
+    modalDispatch("CLOSE_MODAL");
+  };
 
   React.useEffect(() => {
     if (isOpen) {
       modalDispatch("SET_LABELS", {
-        data: eventCardsState.context.labels,
+        data: cardsState.context.labels,
       });
-      modalDispatch("FILTER_BY_LABELS", {
-        data: eventCardsState.context.filterCardsLabels,
+      modalDispatch("SET_FILTER_LABELS", {
+        data: cardsState.context.filterLabels,
       });
       modalDispatch("SET_FILTER_PERIOD", {
-        data: eventCardsState.context.filterCardsPeriod,
+        data: cardsState.context.filterPeriod,
       });
     }
-  }, [isOpen, eventCardsState, modalDispatch]);
+  }, [isOpen, cardsState, modalDispatch]);
 
   return (
     <EventCardFiltersModal
+      labels={modalState.context.labels}
       isOpen={isOpen}
       onClose={onClose}
-      filterSectionsList={<EventCardFilterSectionsListContainer />}
-      applyFiltersButton={<EventCardApplyFiltersButtonContainer />}
+      onApplyFilters={onApplyFilters}
+      selectedLabels={modalState.context.filterLabels}
+      selectedLabelsKeyed={modalState.context.filterLabelsKeyed}
+      selectedPeriod={modalState.context.filterPeriod}
+      onSelectAllPeriods={onSelectAllPeriods}
+      onSelectMonthPeriod={onSelectMonthPeriod}
+      onSelectDayPeriod={onSelectDayPeriod}
+      onSelectLabel={onSelectLabel}
+      onDeselectLabel={onDeselectLabel}
     />
   );
 };

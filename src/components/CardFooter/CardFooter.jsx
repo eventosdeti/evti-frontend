@@ -5,6 +5,7 @@ import { DEFAULT_PADDING } from "../../settings";
 const Wrapper = styled.footer`
   padding: ${DEFAULT_PADDING};
   border-top: 1px solid ${(props) => props.theme.palette.initialColor};
+  display: flex;
 `;
 
 const CardFooter = ({ children, className }) => (

@@ -1,25 +1,18 @@
 import React from "react";
 import styled from "styled-components";
-import { DEFAULT_PADDING } from "../../settings";
 
-import Title from "../Title";
-import StyledCard from "../Card";
+import { pixelToRem } from "../../settings";
 
-const Card = styled(StyledCard)`
-  margin-bottom: ${DEFAULT_PADDING};
-`;
+import NoEventsCard from "../NoEventsCard";
 
-const NoEventsTitle = styled(Title).attrs((props) => ({
-  size: 2,
-  tag: "p",
-}))`
+const EventsFilteredTitle = styled.h2`
   display: flex;
   justify-content: center;
-`;
-
-const EventsFilteredTitle = styled(Title)`
-  display: flex;
-  justify-content: center;
+  font-size: ${pixelToRem(7)};
+  text-transform: uppercase;
+  ${(props) => props.theme.mediaQueries.medium`
+    font-size: ${pixelToRem(8)};
+  `}
 `;
 
 const ClearFilters = styled.span`
@@ -29,7 +22,7 @@ const ClearFilters = styled.span`
 
 const Wrapper = styled.section`
   position: relative;
-  opacity: ${(props) => (props.isLoadingCards && "0.01") || "1"};
+  opacity: ${(props) => (props.isLoadingCards && "0.5") || "1"};
 `;
 
 const EventCards = ({
@@ -48,9 +41,10 @@ const EventCards = ({
         </EventsFilteredTitle>
       )}
       {cards.length === 0 && !isLoadingCards ? (
-        <Card>
-          <NoEventsTitle>Não há eventos</NoEventsTitle>
-        </Card>
+        <NoEventsCard
+          title="Não há eventos"
+          description="Não há eventos para os filtros aplicados"
+        />
       ) : (
         eventCardRender && cards.map(eventCardRender)
       )}

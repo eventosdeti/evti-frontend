@@ -11,41 +11,39 @@ const Wrapper = styled.div`
 `;
 
 const EventCardPeriodFilterButtons = ({
-  period,
-  onViewAll,
-  onViewCurrentMonth,
-  onViewCurrentDay,
-  onEditFilters,
-  buttonsSize = "small",
-  filtered = false,
+  selectedPeriod,
+  filteredByLabels = false,
   disabled = false,
+  buttonsSize = "small",
+  onSelectAllPeriods,
+  onSelectMonthPeriod,
+  onSelectDayPeriod,
+  onEditFilters,
 }) => {
-  const showAll = period === "all";
-  const showCurrentMonth = period === "month";
-  const showCurrentDay = period === "day";
+  const palette = (bool) => (bool && "primary") || "initial";
 
   return (
     <Wrapper>
       <Button
         size={buttonsSize}
-        palette={`${(showCurrentDay && "primary") || "initial"}`}
-        onClick={onViewCurrentDay}
+        palette={palette(selectedPeriod === "day")}
+        onClick={onSelectDayPeriod}
         disabled={disabled}
       >
         Hoje
       </Button>
       <Button
         size={buttonsSize}
-        palette={`${(showCurrentMonth && "primary") || "initial"}`}
-        onClick={onViewCurrentMonth}
+        palette={palette(selectedPeriod === "month")}
+        onClick={onSelectMonthPeriod}
         disabled={disabled}
       >
         Este mês
       </Button>
       <Button
         size={buttonsSize}
-        palette={`${(showAll && "primary") || "initial"}`}
-        onClick={onViewAll}
+        palette={palette(selectedPeriod === "all")}
+        onClick={onSelectAllPeriods}
         disabled={disabled}
       >
         Tudo
@@ -53,7 +51,7 @@ const EventCardPeriodFilterButtons = ({
 
       {onEditFilters && (
         <IconButton
-          palette={(filtered && "primary") || "initial"}
+          palette={palette(filteredByLabels)}
           size={buttonsSize}
           icon={<Filter />}
           onClick={onEditFilters}

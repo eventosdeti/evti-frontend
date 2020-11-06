@@ -9,28 +9,24 @@ const eventCardRender = (card) => (
 );
 
 const EventCardsContainer = () => {
-  const {
-    state: eventCardsSstate,
-    dispatch: eventsCardDispatch,
-  } = useEventCardsContext();
+  const { state, dispatch } = useEventCardsContext();
 
-  const isLoadingCards = eventCardsSstate.matches("loadCards.loading");
-  const isFiltered = eventCardsSstate.matches("filterCardsLabels.filtered");
+  const isLoadingCards = state.matches("loadCards.loading");
+  const isFiltered = state.matches("filterLabels.filtered");
+  const cards = state.context.cards;
 
   const clearFilters = () => {
-    eventsCardDispatch("CLEAR_FILTER_CARD_LABELS");
+    dispatch("CLEAR_FILTER_LABELS");
   };
 
   return (
-    <>
-      <EventCards
-        cards={eventCardsSstate.context.cards}
-        isLoadingCards={isLoadingCards}
-        isFiltered={isFiltered}
-        clearFilters={clearFilters}
-        eventCardRender={eventCardRender}
-      />
-    </>
+    <EventCards
+      cards={cards}
+      isLoadingCards={isLoadingCards}
+      isFiltered={isFiltered}
+      clearFilters={clearFilters}
+      eventCardRender={eventCardRender}
+    />
   );
 };
 
