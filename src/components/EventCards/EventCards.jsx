@@ -1,12 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 
-import Title from "../Title";
+import { pixelToRem } from "../../settings";
+
 import NoEventsCard from "../NoEventsCard";
 
-const EventsFilteredTitle = styled(Title)`
+const EventsFilteredTitle = styled.h2`
   display: flex;
   justify-content: center;
+  font-size: ${pixelToRem(7)};
+  text-transform: uppercase;
+  ${(props) => props.theme.mediaQueries.medium`
+    font-size: ${pixelToRem(8)};
+  `}
 `;
 
 const ClearFilters = styled.span`
