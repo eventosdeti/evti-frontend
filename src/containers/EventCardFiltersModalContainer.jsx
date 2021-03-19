@@ -4,6 +4,7 @@ import EventCardFiltersModal from "../components/EventCardFiltersModal";
 
 import { useEventCardsContext } from "../contexts/EventCards";
 import { useEventCardFiltersModalContext } from "../contexts/EventCardFiltersModal";
+import { useKeyPress } from "../hooks/useKeyPress";
 import { useToasterContext } from "../contexts/Toaster";
 
 const EventCardFiltersModalContainer = () => {
@@ -67,6 +68,8 @@ const EventCardFiltersModalContainer = () => {
     });
     modalDispatch("CLOSE_MODAL");
   };
+
+  useKeyPress("Escape", onClose);
 
   React.useEffect(() => {
     if (isOpen) {

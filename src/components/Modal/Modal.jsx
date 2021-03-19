@@ -19,7 +19,7 @@ const Wrapper = styled(Card).attrs((props) => ({
   ${wrapperBase};
 `;
 
-const Modal = ({ title, footer, children, onClose }) => {
+const Modal = ({ title, footer, children, onClose, EscPress }) => {
   return (
     <ModalBackdrop>
       <Wrapper>
