@@ -1,19 +1,7 @@
-import { Machine, assign } from "xstate";
+import { Machine } from "xstate";
 import { useMachine } from "@xstate/react";
 
-const setLabels = assign({
-  labels: (ctx, event) => {
-    return event?.data || ctx.labels;
-  },
-});
-
-const setFilterLabels = assign({
-  filterLabels: (ctx, event) => event.data || ctx.filterLabels,
-});
-
-const setFilterPeriod = assign({
-  filterPeriod: (ctx, event) => event.data || ctx.filterPeriod,
-});
+import actions from "./actions";
 
 const eventCardFiltersModalMachine = Machine(
   {
@@ -23,6 +11,7 @@ const eventCardFiltersModalMachine = Machine(
       labels: [],
       filterPeriod: "all",
       filterLabels: [],
+      filterLabelsKeyed: {},
     },
     states: {
       filterPeriod: {
@@ -92,17 +81,13 @@ const eventCardFiltersModalMachine = Machine(
       SET_LABELS: {
         actions: ["setLabels"],
       },
-      FILTER_BY_LABELS: {
+      SET_FILTER_LABELS: {
         actions: ["setFilterLabels"],
       },
     },
   },
   {
-    actions: {
-      setLabels,
-      setFilterLabels,
-      setFilterPeriod,
-    },
+    actions,
   }
 );
 

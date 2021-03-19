@@ -2,11 +2,16 @@ import React from "react";
 import styled from "styled-components";
 import Header from "../Header";
 import Footer from "../Footer";
+import StyledContainer from "../Container";
 
 import { DEFAULT_PADDING } from "../../settings";
 
 const Wrapper = styled.div``;
-const Main = styled.main`
+
+const Main = styled(StyledContainer).attrs((props) => ({
+  ...props,
+  as: "main",
+}))`
   min-height: 900px;
   margin: 0 auto;
   padding: ${DEFAULT_PADDING} 0;

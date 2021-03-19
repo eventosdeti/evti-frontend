@@ -1,44 +1,34 @@
 import React from "react";
-import styled, { css } from "styled-components";
-
-import EventCardLabels from "../EventCardLabels";
+import styled from "styled-components";
 
 import StyledCard from "../Card";
-import StyledCardHeader from "../CardHeader";
 import CardBody from "../CardBody";
-import CardFooter from "../CardFooter";
+
+import EventCardHeader from "../EventCardHeader";
+import EventCardFooter from "../EventCardFooter";
+import EventCardLabels from "../EventCardLabels";
 
 import Title from "../Title";
 import Button from "../Button";
+import Label from "../Label";
 
-import { DEFAULT_PADDING } from "../../settings";
-
-const datetime = css`
-  text-transform: uppercase;
-  font-weight: bold;
-  color: ${(props) => props.theme.palette.primaryColor};
-  font-size: 0.9rem;
-  ${(props) => props.theme.mediaQueries.medium`
-  font-size: 1rem;
-`}
-`;
+import { DEFAULT_PADDING, pixelToRem } from "../../settings";
 
 const Card = styled(StyledCard).attrs((props) => ({
+  ...props,
   isCollapsed: true,
 }))`
   margin-bottom: ${DEFAULT_PADDING};
 `;
 
-const CardHeader = styled(StyledCardHeader)`
-  justify-content: space-between;
+const MoreInfoButton = styled(Button)`
+  margin-top: ${DEFAULT_PADDING};
+  margin-bottom: ${DEFAULT_PADDING};
 `;
 
-const DueDate = styled.div`
-  ${datetime}
-`;
-
-const DueTime = styled.div`
-  ${datetime}
+const Desc = styled.div`
+  font-size: ${pixelToRem(10)};
+  line-height: 1.5;
 `;
 
 const EventCard = ({
@@ -49,29 +39,30 @@ const EventCard = ({
   labels,
   onClickLabel,
   moreInfoUrl,
+  shortURL,
 }) => {
   return (
     <Card>
-      <CardHeader>
-        <DueDate>{dueDate}</DueDate>
-        <DueTime>{dueTime}</DueTime>
-      </CardHeader>
+      <EventCardHeader dueDate={dueDate} dueTime={dueTime} />
       <CardBody>
-        <Title size={1}>{name}</Title>
-        <div dangerouslySetInnerHTML={{ __html: desc }} />
-        <EventCardLabels labels={labels} onClickLabel={onClickLabel} />
-      </CardBody>
-      <CardFooter>
-        <Button
+        <Title size={1} as="h2">
+          {name}
+        </Title>
+        <Desc dangerouslySetInnerHTML={{ __html: desc }} />
+        <MoreInfoButton
+          forwardedAs="a"
           size="tiny"
-          as="a"
+          palette="tertiary"
+          variant="outlined"
           href={moreInfoUrl}
           target="_blank"
           rel="noopener noreferrer"
         >
-          Mais informações
-        </Button>
-      </CardFooter>
+          Ir para o site do evento
+        </MoreInfoButton>
+        <EventCardLabels labels={labels} onClickLabel={onClickLabel} />
+      </CardBody>
+      <EventCardFooter shortURL={shortURL} />
     </Card>
   );
 };

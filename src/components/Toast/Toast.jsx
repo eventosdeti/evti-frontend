@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Card from "../Card";
 import Button from "../Button";
 
+import { pixelToRem } from "../../settings";
 const CloseButton = styled(Button)``;
 
 const Wrapper = styled(Card)`
@@ -12,6 +13,7 @@ const Wrapper = styled(Card)`
   align-items: center;
   padding: 10px 15px;
   margin: 5px;
+  font-size: ${pixelToRem(9)};
 `;
 
 const Toast = ({ id, content, duration = 3000, unqueueToast }) => {
